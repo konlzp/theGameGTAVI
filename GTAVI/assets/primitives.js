@@ -1,0 +1,9 @@
+document.write('<script type="text/javascript" src="assets/cube.js"></script>');
+document.write('<script type="text/javascript" src="assets/cone.js"></script>');
+document.write('<script type="text/javascript" src="assets/cylinder.js"></script>');
+document.write('<script type="text/javascript" src="assets/sphere_latlong.js"></script>');
+document.write('<script type="text/javascript" src="assets/Sphere-subd.js"></script>');
+document.write('<script type="text/javascript" src="assets/torus.js"></script>');
+document.write('<script type="text/javascript" src="assets/tetrahedron.js"></script>');
+document.write('<script type="text/javascript" src="assets/pentahedron.js"></script>');
+document.write('<script type="text/javascript" src="assets/circularstreet.js"></script>');

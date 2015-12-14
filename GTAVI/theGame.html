@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<title>GTA IV</title>
+    <link rel="stylesheet" href="./assets/style.css">
+		<script type="text/javascript" src="./assets/collision.js"></script>
+    <script type="text/javascript" src="./assets/spidergl.js"></script>
+		<script type="text/javascript" src="./assets/spidergl-config.js"></script>
+		<script type="text/javascript" src="./assets/nvmc.js"></script>
+		<script type="text/javascript" src="./assets/nvmc-config.js"></script>
+		<script type="text/javascript" src="./assets/primitives.js"></script>
+		<script type="text/javascript" src="./assets/track.js"></script>
+		<script type="text/javascript" src="./assets/quadrilateral.js"></script>
+		<script type="text/javascript" src="./assets/building.js"></script>
+		<script type="text/javascript" src="./assets/race.js"></script>
+		<script type="text/javascript" src="./assets/0.js"></script>
+		<script type="text/javascript" src="./assets/shaders.js"></script>
+		<script type="text/javascript" src="./assets/1.js"></script>
+		<script type="text/javascript" src="./assets/2.js"></script>
+		<script type="text/javascript" src="./assets/nvmc-glue.js"></script>
+		<script type="text/javascript" src="./assets/character.js"></script>
+		<script type="text/javascript" src="./assets/bullet.js"></script>
+	</head>
+	<body>
+
+        <center>
+			<h2>GTA IV</h2>
+			  <hr/>
+				<div align = "center">
+					<span>
+			  <canvas id="nvmc-canvas" width="1000" height="600" style="border:1px solid gray;" ></canvas>
+				<span id="bulletLeft"></span>
+				<span id="enemyLeft"></span>
+			</span>
+				<hr/>
+			</div>
+			<div hidden = true><h3>Log</h3>
+			  <textarea id="nvmc-log" rows="4" cols="80"></textarea>
+			  <div id="nvmc-fps">FPS</div>
+			  <div id="nvmc-latency">Latency</div>
+			  <div id="nvmc-server-clock-delta">Server Clock Delta</div>
+			  <div id="nvmc-server-time">Server Time</div>
+			<hr/>
+		</div>
+		<input type="button" value="music switch" onclick="musicSwitch()">
+		<ul style="list-style-type:none" width="100%">
+			<li>Instructions</li>
+				<li>
+					<table>
+						<tr>
+						<td>[w]: move forward (mode 1 and 3 and 4)<br>
+						[s]: move backward (mode 1 and 3 and 4)<br>
+						[a]: steer left (mode 1 and 4) / pan left (mode 3)<br>
+						[d]: steer right (mode 1 and 4) / pan right (mode 3)<br>
+					</td>
+					<td>
+						[q]: move up (mode 2,3)<br>
+						[e]: move down (mode 2,3)<br>
+						[2]: ++mode<br>
+						[1]: --mode<br>
+					</td>
+					<td>
+						Modes:<br>
+						1: Chase View <br>
+						2: Photographer View<br>
+						3: The observer Camera <br>
+						4: The Front View <br>
+					</td>
+					<td>
+						[n]: Orbit around a fix point in front of the camera<br>
+						[m]: Look around <br>
+						[l]: lock view to the car (in photographer mode)<br>
+						[u]: unlock view to the car (in photographer mode)<br>
+					</td>
+				</tr>
+					</table>
+		</ul>
+		</center>
+	</body>
+</html>
