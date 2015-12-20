@@ -40,6 +40,7 @@ NVMCClient.drawBullet = function(gl, ind) {
         this.bullets[ind].moving = 0;
         this.enemiesLeft --;
         document.getElementById("enemyLeft").innerHTML = "Enemies Left: " + this.enemiesLeft;
+        this.dieSound.play();
         if(this.enemiesLeft == 0) {
           this.mainTheme.pause();
           this.winSound.play();

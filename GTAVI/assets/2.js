@@ -291,6 +291,7 @@ NVMCClient.onInitialize = function () {
 
 		this.winSound = new Audio("./assets/win.mp3");
 		this.lostSound = new Audio("./assets/lost.wav");
+		this.dieSound = new Audio("./assets/die.wav");
 };
 
 function musicSwitch() {
