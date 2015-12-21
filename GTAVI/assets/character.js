@@ -75,7 +75,7 @@ NVMCClient.drawHand = function(gl) {
 	this.drawFingers(gl);
 }
 
-NVMCClient.drawArm = function(gl, angle) {
+NVMCClient.drawArm = function(gl, angle, colors) {
 	var stack = this.stack;
 
 
@@ -84,13 +84,13 @@ NVMCClient.drawArm = function(gl, angle) {
 	stack.multiply(SglMat4.translation([0, -4, 0]));
 	stack.multiply(SglMat4.scaling([0.5,2,0.5]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.upperArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.upperArm, colors, [0, 0, 0, 1.0]);
 	stack.pop();
 
 	stack.push();
 	stack.multiply(SglMat4.translation([0, -4, 0]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.sphere, [0.8, 0.2, 0.2, 1.0], [1.0, 0, 0, 1.0]);
+	this.drawObject(gl, this.sphere, colors, [1.0, 0, 0, 1.0]);
 	stack.pop();
 
 	stack.multiply(SglMat4.translation([0, -4, 0]));
@@ -101,7 +101,7 @@ NVMCClient.drawArm = function(gl, angle) {
 	stack.multiply(SglMat4.scaling([0.5,2,0.5]));
 	stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(180), [0, 0, 1]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.lowerArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.lowerArm, colors, [0, 0, 0, 1.0]);
 	stack.pop(); //{mv}
 
   stack.multiply(SglMat4.translation([0, -5, 0]));
@@ -112,7 +112,7 @@ NVMCClient.drawArm = function(gl, angle) {
 
 }
 
-NVMCClient.drawHead = function(gl) {
+NVMCClient.drawHead = function(gl, colors) {
   var stack = this.stack;
 
 	stack.push();
@@ -122,7 +122,7 @@ NVMCClient.drawHead = function(gl) {
 	stack.push();
 	stack.multiply(SglMat4.scaling([0.6, 1, 0.7]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.upperArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.upperArm, colors, [0, 0, 0, 1.0]);
 	stack.pop();
 
 	//Draw Head
@@ -159,7 +159,8 @@ NVMCClient.drawHead = function(gl) {
 	stack.pop();
 }
 
-NVMCClient.drawBody = function(gl, rank) {
+
+NVMCClient.drawBody = function(gl, rank, colors) {
   var stack = this.stack;
 
 	stack.push();//{mV, mV}
@@ -170,13 +171,13 @@ NVMCClient.drawBody = function(gl, rank) {
   if(this.alive[rank - 1] == 0) {
     stack.multiply(SglMat4.translation([0, 2, 0]));
   }
-	this.drawHead(gl);
+	this.drawHead(gl, colors.headColor);
   stack.pop();
 
 	stack.push();//{mV, mV, mV * loc}
 	stack.multiply(SglMat4.scaling([1, 7, 3.5]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.cube, [0.3, 0.7, 0.7, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.cube, colors.bodyColor, [0, 0, 0, 1.0]);
 	stack.pop();
 
 	stack.push();
@@ -185,13 +186,13 @@ NVMCClient.drawBody = function(gl, rank) {
 	stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(45), [0, 1, 0]));
 	stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(90), [1, 0, 0]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.penta, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.penta, colors.bodyColor, [0, 0, 0, 1.0]);
 	stack.pop();
 
 	stack.pop();
 }
 
-NVMCClient.drawFoot = function(gl) {
+NVMCClient.drawFoot = function(gl, colors) {
 	var stack = this.stack;
 
 	stack.push();
@@ -199,12 +200,12 @@ NVMCClient.drawFoot = function(gl) {
 	stack.multiply(SglMat4.translation([-1, -8, 0]));
 	stack.multiply(SglMat4.scaling([2, 0.3, 1]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.cube, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.cube, colors, [0, 0, 0, 1.0]);
 
 	stack.pop();
 }
 
-NVMCClient.drawLeg = function(gl, angle, rank) {
+NVMCClient.drawLeg = function(gl, angle, rank, colors) {
 	var stack = this.stack;
 	stack.push()
 	// Draw upper leg
@@ -213,13 +214,13 @@ NVMCClient.drawLeg = function(gl, angle, rank) {
 	stack.multiply(SglMat4.scaling([0.8, 4, 0.8]));
 	stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(180), [0, 0, 1]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.upperArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.upperArm, colors, [0, 0, 0, 1.0]);
 	stack.pop();
 
 	// Draw lower leg
 	stack.multiply(SglMat4.translation([0, -8, 0]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.sphere, [0.8, 0.2, 0.2, 1.0], [1, 0, 0, 1.0]);
+	this.drawObject(gl, this.sphere, colors, [1, 0, 0, 1.0]);
 
 	if(angle < 0 && (((!this.game.playerBrake) && this.game.playerAccelerate) || rank != 0)) {
 		stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(- 2 *angle), [0, 0, 1]));
@@ -229,28 +230,29 @@ NVMCClient.drawLeg = function(gl, angle, rank) {
 	stack.multiply(SglMat4.scaling([0.8, 4, 0.8]));
 	stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(180), [0, 0, 1]));
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-	this.drawObject(gl, this.lowerArm,[0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+	this.drawObject(gl, this.lowerArm,colors, [0, 0, 0, 1.0]);
 	stack.pop();
-	this.drawFoot(gl);
+	this.drawFoot(gl, colors);
 	stack.pop();
 }
 
-NVMCClient.drawLegs = function(gl, rank) {
+
+NVMCClient.drawLegs = function(gl, rank, colors) {
   var stack = this.stack;
 
 
 	stack.push();
 	stack.multiply(SglMat4.translation([0, -0.5, -2]));
-	this.drawLeg(gl, this.legAngle, rank);
+	this.drawLeg(gl, this.legAngle, rank, colors);
 	stack.pop();
 
 	stack.push();
 	stack.multiply(SglMat4.translation([0, -0.5, 2]));
-	this.drawLeg(gl, - this.legAngle, rank);
+	this.drawLeg(gl, - this.legAngle, rank, colors);
 	stack.pop();
 }
 
-NVMCClient.drawArms = function(gl) {
+NVMCClient.drawArms = function(gl, colors) {
 
 		var stack = this.stack;
 
@@ -261,9 +263,9 @@ NVMCClient.drawArms = function(gl) {
 			stack.multiply(SglMat4.scaling([0.5,0.5,1.5]));
 			stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(90),[1,0,0]));
 			gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-			this.drawObject(gl, this.upperArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+			this.drawObject(gl, this.upperArm, colors, [0, 0, 0, 1.0]);
 			stack.pop();
-		this.drawArm(gl,this.armAngle);
+		this.drawArm(gl,this.armAngle, colors);
 		stack.pop();
 
 		stack.push();
@@ -273,9 +275,9 @@ NVMCClient.drawArms = function(gl) {
 			stack.multiply(SglMat4.scaling([0.5,0.5,1.5]));
 			stack.multiply(SglMat4.rotationAngleAxis(sglDegToRad(90),[1,0,0]));
 			gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);
-			this.drawObject(gl, this.upperArm, [0.8, 0.2, 0.2, 1.0], [0, 0, 0, 1.0]);
+			this.drawObject(gl, this.upperArm, colors, [0, 0, 0, 1.0]);
 			stack.pop();
-		this.drawArm(gl,- this.armAngle);
+		this.drawArm(gl,- this.armAngle, colors);
 		stack.pop();
 }
 
@@ -365,9 +367,9 @@ NVMCClient.drawThePrimitive = function(gl, rank) { //If rank == 0, then characte
 		this.armAngle = 30 * Math.sin(2 * Math.PI * this.forwardFlag[rank] / 200);
 	}
 
-	this.drawArms(gl);
+	this.drawArms(gl, this.charColors[rank].limbColor);
 
-	this.drawBody(gl, rank);
+	this.drawBody(gl, rank, this.charColors[rank]);
 
 	stack.multiply(SglMat4.translation([0, -7.5, 0]));
 
@@ -387,7 +389,7 @@ NVMCClient.drawThePrimitive = function(gl, rank) { //If rank == 0, then characte
 		this.forwardFlag[rank] --;
 	}
 
-	this.drawLegs(gl, rank);
+	this.drawLegs(gl, rank, this.charColors[rank].limbColor);
 	stack.pop();
 
 	gl.uniformMatrix4fv(this.uniformShader.uModelViewMatrixLocation, false, stack.matrix);

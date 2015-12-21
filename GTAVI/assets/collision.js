@@ -134,25 +134,6 @@ collisonDetect = function(position, dir, rank) {
   for(var i = 0; i < buildings.length; i ++) {
     var building = buildings[i];
     targetRect = [];
-    // var xCoords = [];
-    // var zCoords = [];
-    // for(var j = 0; j < 4; j ++) {
-    //   xCoords.push(building._outline[4 * j + 0]);
-    //   zCoords.push(building._outline[4 * j + 2]);
-    // }
-    // targetRect.push([Math.min(...xCoords), Math.max(...zCoords)]);
-    // targetRect.push([Math.max(...xCoords), Math.min(...zCoords)]);
-    // targetRect = new SAT.Polygon(new SAT.Vector(), [
-    //   new SAT.Vector(xCoords[0], zCoords[0]),
-    //     new SAT.Vector(xCoords[1], zCoords[1]),
-    //       new SAT.Vector(xCoords[2], zCoords[3]),
-    //         new SAT.Vector(xCoords[2], zCoords[3])
-    // ])
-    // var collideResponse = new SAT.Response();
-    // var collide = SAT.testPolygonPolygon(rect, targetRect, collideResponse);
-    // if((collideResponse.a != null && (collideResponse.aInB || collideResponse.bInA)) || collide) {
-    //   return NVMCClient.NPCnum;
-    // }
 
     for(var j = 0; j < 4; j ++) {
       targetRect.push(building._outline[4 * j + 0], building._outline[4 * j + 2]);

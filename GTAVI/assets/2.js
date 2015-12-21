@@ -248,6 +248,15 @@ NVMCClient.onInitialize = function () {
 			this.OriCount.push(0);
 		}
 
+
+		for(var i = 0; i < this.NPCnum; i ++) {
+				while(collisonDetect([this.NPCOffset[i * 3 + 0], this.NPCOffset[i * 3 + 1], this.NPCOffset[i * 3 + 2]], [0, 0, 0], i) != -1) {
+					this.NPCOffset[i * 3 + 0] = 100 * Math.random() - 50;
+					this.NPCOffset[i * 3 + 1] = 0;
+					this.NPCOffset[i * 3 + 2] = 100 * Math.random() - 50;
+				}
+		}
+
 		this.legAngle = 0;
 		this.armAngle = 0;
 
@@ -264,6 +273,11 @@ NVMCClient.onInitialize = function () {
 		this.forwardFlag = []
 		for(var i = 0; i <= this.NPCnum; i ++) {
 			this.forwardFlag.push(0);
+		}
+
+		this.charColors = []
+		for(var i = 0; i <= this.NPCnum; i ++) {
+			this.charColors.push(new charColor([Math.random(), Math.random(), Math.random(), 1.0], [Math.random(), Math.random(), Math.random(), 1.0], [Math.random(), Math.random(), Math.random(), 1.0]));
 		}
 
 		this.footstep = new Audio("./assets/footstep.wav");

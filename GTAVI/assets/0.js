@@ -14,6 +14,12 @@ var frontFlag = 0;
 var res = 20;
 /***********************************************************************/
 
+var charColor = function (bodyColor, headColor, limbColor) {
+  this.bodyColor = bodyColor;
+  this.headColor = headColor;
+  this.limbColor = limbColor;
+}
+
 NVMCClient.myPos = function () {
 	return this.game.state.players.me.dynamicState.position;
 }
